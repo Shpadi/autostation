@@ -1,32 +1,50 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
-  </div>
+  <v-app>
+      <v-app-bar absolute color="primary">
+        <template v-for="page in pages">
+          <router-link :to="page.link" :key="page.name" class="link px-3"> {{ page.name }} </router-link>
+        </template>
+      </v-app-bar>
+      <div class="mt-16">
+         <router-view />
+      </div>
+  </v-app>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
 
-#nav {
-  padding: 30px;
+export default {
+  name: "App",
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+  data: () => ({
+    pages: [{
+      name: 'Home',
+      link: '/'
+    },
+    {
+      name: 'Create Trip',
+      link: '/create-trip'
+    },
+    {
+      name: 'Create Waybill',
+      link: '/create-waybill'
+    },
+    {
+      name: "Create Transport",
+      link: "/create-transport",
+    },
+    {
+      name: "Cash",
+      link: "/cash",
+    },
+    ]
+  })
+};
+</script>
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+<style scoped>
+.link {
+  color: #fff;
+  text-decoration: none;
 }
 </style>
